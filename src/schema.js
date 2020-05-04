@@ -8,7 +8,8 @@ const typeDefs = `
     qty: Int
   },
   type Query {
-    allProducts: [Product]
+    allProducts: [Product],
+    getProduct(_id: ID): Product
   },
   input ProductInput {
     name: String!,
