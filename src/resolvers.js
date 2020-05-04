@@ -18,6 +18,9 @@ export const resolvers = {
         new: true,
         useFindAndModify: false
       });
+    },
+    async deleteProduct(_, { _id }) {
+      return await Product.findOneAndDelete({ _id });
     }
   }
 };
