@@ -16,7 +16,8 @@ const typeDefs = `
     qty: Int
   },
   type Mutation {
-    createProduct(input: ProductInput) : Product
+    createProduct(input: ProductInput): Product,
+    updateProduct(_id: ID, input: ProductInput): Product
   }
 `;
 
