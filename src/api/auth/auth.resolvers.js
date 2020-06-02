@@ -1,11 +1,16 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { APP_SECRET } from "../../config";
+import { validateUser } from "../../utils/util";
 
 async function signup(_, { input }, ctx, info) {
-  const password = await bcrypt.hash(input.password, 10);
+  const {value, error} = validateUser(input);
+  if(error) {
+    throw new Error(error.message);
+  }
+  const password = await bcrypt.hash(value.password, 10);
   const user = await ctx.models.user.create({
-    email: input.email,
+    email: value.email,
     password
   });
   console.log(APP_SECRET);
