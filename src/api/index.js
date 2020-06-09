@@ -1,8 +1,10 @@
 import product from "./product";
 import auth from "./auth";
+import merge from "lodash.merge";
 
+const resolvers = merge({}, product.resolvers, auth.resolvers);
 export default {
-  resolvers: Object.assign({}, product.resolvers, auth.resolvers),
+  resolvers,
   typeDefs: [product.typeDefs, auth.typeDefs].join(""),
   context: {
     models: {
