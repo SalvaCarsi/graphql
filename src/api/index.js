@@ -6,10 +6,11 @@ const resolvers = merge({}, product.resolvers, auth.resolvers);
 export default {
   resolvers,
   typeDefs: [product.typeDefs, auth.typeDefs].join(""),
-  context: {
+  context: req => ({
+    ...req,
     models: {
       product: product.model,
       user: auth.model
     }
-  }
+  })
 };
