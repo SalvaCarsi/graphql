@@ -8,6 +8,11 @@ const ProductSchema = new Schema({
   },
   qty: {
     type: Number
+  },
+  owner: {
+    ref: "User",
+    type: Schema.Types.ObjectId,
+    required: true
   }
 });
 
