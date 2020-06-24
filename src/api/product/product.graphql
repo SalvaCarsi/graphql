@@ -9,7 +9,7 @@ type Product {
   owner: Owner!
 },
 type Query {
-  allProducts(skip: Int, first: Int): [Product]!,
+  allProducts(skip: Int, first: Int, filter: String): [Product]!,
   getProduct(_id: ID): Product!
 },
 input ProductInput {
