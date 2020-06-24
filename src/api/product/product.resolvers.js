@@ -1,6 +1,6 @@
 export default {
   Query: {
-    async allProducts(_, { first = 10, skip = 0, filter }, ctx) {
+    async allProducts(_, { first = 50, skip = 0, filter, orderBy }, ctx) {
       const query = filter ? { $or: [{ name: filter }] } : {};
       return await ctx
         .models
@@ -8,7 +8,8 @@ export default {
         .find(query)
         .select('_id name qty owner')
         .skip(skip)
-        .limit(first);
+        .limit(first)
+        .sort(orderBy);
     },
     async getProduct(_, { _id }, ctx) {
       return await ctx.models.product.findById(_id);
