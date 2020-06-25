@@ -4,6 +4,7 @@ import graphqlConfig from "./api";
 import { makeExecutableSchema } from "graphql-tools";
 import { applyMiddleware } from "graphql-middleware";
 import { authMiddleware } from "./api/middlewares";
+import { getDateInNumbers } from "./utils/util";
 
 const PORT = 3000;
 mongoose.Promise = global.Promise;
@@ -31,4 +32,5 @@ const server = new GraphQLServer({
   schema: protectedSchema,
   context: graphqlConfig.context
 });
+console.log(getDateInNumbers());
 server.start(options, () => console.log("Server is running on localhost:3000"));

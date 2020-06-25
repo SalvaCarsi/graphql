@@ -1,16 +1,31 @@
+import { parseDate } from "../../utils/util";
+
 export default {
   Query: {
     async allProducts(_, { first = 50, skip = 0, filter, orderBy }, ctx) {
       const query = filter ? { $or: [{ name: filter }] } : {};
-      return await ctx
-        .models
-        .product
+      return await ctx.models.product
         .find(query)
-        .select('_id name qty owner')
+        .select("_id name qty owner")
         .skip(skip)
         .limit(first)
         .sort(orderBy);
     },
+    async findAllProducts(_, { first = 50, cursor }, ctx) {
+      const query = {};
+      if (cursor) {
+        const date = parseDate(cursor);
+        query.createdAt = {
+          $lt: date
+        };
+      }
+      return await ctx.models.product
+        .find(query)
+        .select("_id name qty createdAt owner")
+        .limit(first)
+        .sort('-createdAt');
+    },
+
     async getProduct(_, { _id }, ctx) {
       return await ctx.models.product.findById(_id);
     }

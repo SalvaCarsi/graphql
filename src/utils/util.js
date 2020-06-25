@@ -18,3 +18,14 @@ export function validateUser(user) {
 
   return { value };
 }
+
+export function getDateInNumbers() {
+  const date = new Date();
+  return Date.parse(date);
+}
+
+export function parseDate(dateInNumbers) {
+  const date = new Date();
+  date.setTime(dateInNumbers);
+  return date;
+}
