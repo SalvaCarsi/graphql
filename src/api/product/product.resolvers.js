@@ -6,7 +6,7 @@ export default {
       const query = filter ? { $or: [{ name: filter }] } : {};
       return await ctx.models.product
         .find(query)
-        .select("_id name qty owner")
+        .select("_id name qty owner status")
         .skip(skip)
         .limit(first)
         .sort(orderBy);
@@ -21,7 +21,7 @@ export default {
       }
       return await ctx.models.product
         .find(query)
-        .select("_id name qty createdAt owner")
+        .select("_id name qty createdAt owner status")
         .limit(first)
         .sort('-createdAt');
     },

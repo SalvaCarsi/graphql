@@ -1,13 +1,19 @@
+enum Status {
+  NEW
+  RELEASED
+  FAILED
+},
 type Owner {
   _id: ID!,
   email: String!
-}
+},
 type Product {
   _id: ID,
   name: String!,
   qty: Int,
   owner: Owner!,
-  createdAt: String
+  createdAt: String,
+  status: Status
 },
 type Query {
   allProducts(skip: Int, first: Int, filter: String, orderBy: String): [Product]!,
@@ -16,7 +22,8 @@ type Query {
 },
 input ProductInput {
   name: String!,
-  qty: Int
+  qty: Int,
+  status: Status
 },
 type Mutation {
   createProduct(input: ProductInput!): Product!,
